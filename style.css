@@ -1,0 +1,16 @@
+body {
+    background-color: lightyellow;
+  }
+  
+h1,h2,h3,h4,h5 {
+    background-color:greenyellow;
+    color: navy;
+    font-size: larger;
+    font-weight: bold;
+    border-style: solid;
+  }
+p2,p3,p4,p5,ul{
+    background-color:gold;
+    margin: auto;
+    border-style: solid;
+}

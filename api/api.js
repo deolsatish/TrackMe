@@ -290,9 +290,9 @@ app.get('/api/devices/:deviceId/device-history', (req, res) => {
     });
 
 
-app.post('/api/send-command', (req, res) => {
-    console.log(req.body);
-});
+//app.post('/api/send-command', (req, res) => {
+//    console.log(req.body);
+//});
 /**
 * @api {get} /api/users/:user/devices Returns device for specific user
 * @apiGroup User

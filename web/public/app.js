@@ -2,6 +2,7 @@ $('#navbar').load('navbar.html');
 $('#footbar').load('footer.html');
 
 const API_URL = 'https://trackme-one.vercel.app/api';
+const MQTT_URL = 'http://localhost:5001';
 
 const response = $.get(`${API_URL}/devices`);
 
@@ -151,7 +152,24 @@ const logout = () => {
 
 
 $('#send-command').on('click', function() {
+    const deviceId = $('#deviceId').val();
     const command = $('#command').val();
-    console.log(`command is: ${command}`);
+    $.post(`${MQTT_URL}send-command`, { "deviceId":deviceId, "command":command })
+    .then((response) =>{
+        console.log("response");
+        console.log(response);
+    if (response.success) 
+    {
+        //console.log("response");
+        //console.log(response);
+        localStorage.setItem('user', user);
+        localStorage.setItem('isAdmin', response.isAdmin);
+        localStorage.setItem('isAuthenticated',true);
+        location.href = '/';
+    }
+    else
+    {
+        $('#message').append(`<p class="alert alert-danger">${response}</p>`);
+    }
+    });
 });
-

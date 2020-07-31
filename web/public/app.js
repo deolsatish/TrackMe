@@ -160,12 +160,7 @@ $('#send-command').on('click', function() {
         console.log(response);
     if (response.success) 
     {
-        //console.log("response");
-        //console.log(response);
-        localStorage.setItem('user', user);
-        localStorage.setItem('isAdmin', response.isAdmin);
-        localStorage.setItem('isAuthenticated',true);
-        location.href = '/';
+        
     }
     else
     {

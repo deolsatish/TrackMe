@@ -1,7 +1,7 @@
 $('#navbar').load('navbar.html');
 $('#footbar').load('footer.html');
 
-const API_URL = 'https://trackme-one.vercel.app/api';
+const API_URL = 'https://trackme-one.alpha.app/api';
 const MQTT_URL = 'http://localhost:5001';
 
 const response = $.get(`${API_URL}/devices`);
@@ -160,7 +160,7 @@ $('#send-command').on('click', function() {
         console.log(response);
     if (response.success) 
     {
-        
+
     }
     else
     {

@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap
 .min.css" />
@@ -13,26 +13,26 @@ scale=1.0>
 <title>TrackMe</title>
 </head>
 <body>
-    
-    <h1>Login</h1>
     <div class="container">
         <div id="navbar"></div>
     </div>
-    <div class="form-group">
+    <h1>Login</h1>
+    <br>
+    <div ng-app="loginapp" ng-controller="formCtrl">
         <label for="username">User</label>
-        <input type="text" class="form-control" id="username" />
-    </div>
-    <div class="form-group">
+        <input type="text" class="form-control" ng-model="username" />
+        <br>
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" />
-    </div>
-    <button class="btn btn-success" id="login">Login</button>
-    <br>
-    <p><a href="registration.html"> Don't Have an account? Create One Here.</a></p>
-    <div class="message" id="message"></div>
-    <br>
-    <div class="container">
-        <div id="footbar"></div>
+        <input type="password" class="form-control" ng-model="password" />
+        <br>
+        <button ng-click="submit()" class="btn btn-success" id="login">Login</button>
+        <br>
+        <br>
+        <p><a href="registration.html"> Don't Have an account? Create One Here.</a></p>
+        <br>
+        <p ng-show="bool" class="alert alert-danger">{{message}}</p>
+        <div ng-include="'footer.html'"></div>
+        <br>
     </div>
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

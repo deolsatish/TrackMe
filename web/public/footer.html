@@ -1,10 +1,5 @@
-<footer class="footbar expand">
-<div class="footer-copyright text-center py-3",id=footbar>© 2020 Copyright:</div>
-<script>
-var str1="Copyright DeolSatish ";
-var d = new Date();
-var str2= d.getFullYear().toString();
-var str=str1+str2+".";
-document.getElementById("footbar").innerHTML = "&copy "+str;
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<footer ng-app="" class="footbar expand" ng-init="footerelement='© Copyright DeolSatish 2020'" >
+    <div class="footer-copyright text-center py-3">{{footerelement}}</div>
 </footer>

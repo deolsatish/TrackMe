@@ -37,6 +37,9 @@ res.send('The API is working!');
 app.listen(port, () => {
 console.log(`listening on port ${port}`);
 });
+
+
+
 const Device = require('./models/device');
 const User = require('./models/user');
 

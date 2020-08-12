@@ -161,7 +161,7 @@ sendcommandapp.controller('formCtrl',function($scope)
 
 
 
-var loginapp=angular.module('loginapp',["ngRoute"]);
+var loginapp=angular.module('loginapp',[]);
 loginapp.controller('formCtrl',function($scope,$http)
 {
     $scope.username="";

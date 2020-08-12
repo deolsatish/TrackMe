@@ -9,52 +9,54 @@ const response = $.get(`${API_URL}/devices`);
 const isAuthenticated=JSON.parse(localStorage.getItem('isAuthenticated')) || false;
 const currentUser = localStorage.getItem('user');
 
-if (currentUser) 
-{
-    var devicesapp=angular.module('devicesapp',[]);
+var devicesapp=angular.module('devicesapp',[]);
     devicesapp.controller('formCtrl',function($scope)
     {
-        $.get(`${API_URL}/users/${currentUser}/devices`).then(response => {
-            response.forEach((device) => {
-                console.log("'#devices tbody'");
-                $('#devices tbody').append(`
-                <tr data-device-id=${device._id}>
-                <td>${device.user}</td>
-                <td>${device.name}</td>
-                </tr>`
-                );
-            });console.log("'#devices tbody endeededed");
-            $('#devices tbody tr').on('click', (e) => {
-                console.log("#devices tbody trasdasdasdasdasdasqwd");
-                const deviceId = e.currentTarget.getAttribute('data-device-id');
-                $.get(`${API_URL}/devices/${deviceId}/device-history`).then(response => {response.map(sensorData => {
-                    $('#historyContent').empty();
-                    $('#historyContent').append(`
-                    <tr>
-                    <td>${sensorData.ts}</td>
-                    <td>${sensorData.temp}</td>
-                    <td>${sensorData.loc.lat}</td>
-                    <td>${sensorData.loc.lon}</td>
-                    </tr>
-                    `);
+        if (currentUser) 
+        {
+            $.get(`${API_URL}/users/${currentUser}/devices`).then(response => {
+                response.forEach((device) => {
+                    console.log("'#devices tbody'");
+                    $('#devices tbody').append(`
+                    <tr data-device-id=${device._id}>
+                    <td>${device.user}</td>
+                    <td>${device.name}</td>
+                    </tr>`
+                    );
+                });console.log("'#devices tbody endeededed");
+                $('#devices tbody tr').on('click', (e) => {
+                    console.log("#devices tbody trasdasdasdasdasdasqwd");
+                    const deviceId = e.currentTarget.getAttribute('data-device-id');
+                    $.get(`${API_URL}/devices/${deviceId}/device-history`).then(response => {response.map(sensorData => {
+                        $('#historyContent').empty();
+                        $('#historyContent').append(`
+                        <tr>
+                        <td>${sensorData.ts}</td>
+                        <td>${sensorData.temp}</td>
+                        <td>${sensorData.loc.lat}</td>
+                        <td>${sensorData.loc.lon}</td>
+                        </tr>
+                        `);
+                        });
+                        $('#historyModal').modal('show');
                     });
-                    $('#historyModal').modal('show');
-                });
-        });
-        })
-        .catch(error => {
-            console.error(`Error: ${error}`);
-        });
-})
-}
-else
-{
-    const path = window.location.pathname;
-    if (path !== '/login')
-    {
-        //location.href = '/login';
-    }
-}
+            });
+            })
+            .catch(error => {
+                console.error(`Error: ${error}`);
+            });
+        }
+        else
+        {
+            const path = window.location.pathname;
+            
+            if (path !== '/login')
+            {
+                //location.href = '/login';
+            }
+        }
+    });
+
 
 
 var adddeviceapp=angular.module('adddeviceapp',[]);

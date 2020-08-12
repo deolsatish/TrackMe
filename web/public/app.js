@@ -1,28 +1,24 @@
 $('#navbar').load('navbar.html');
 
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://trackme.deolsatish.vercel.app/api';
 const MQTT_URL = 'http://localhost:5001';
 
 const response = $.get(`${API_URL}/devices`);
 
 const isAuthenticated=JSON.parse(localStorage.getItem('isAuthenticated')) || false;
 const currentUser = localStorage.getItem('user');
-
-var devicesapp=angular.module('devicesapp',[]);
-    devicesapp.controller('formCtrl',function($scope)
-    {
-        if (currentUser) 
-        {
-            $.get(`${API_URL}/users/${currentUser}/devices`).then(response => {
-                response.forEach((device) => {
-                    console.log("'#devices tbody'");
-                    $('#devices tbody').append(`
-                    <tr data-device-id=${device._id}>
-                    <td>${device.user}</td>
-                    <td>${device.name}</td>
-                    </tr>`
-                    );
+if (currentUser) 
+{
+    $.get(`${API_URL}/users/${currentUser}/devices`).then(response => {
+        response.forEach((device) => {
+                console.log("'#devices tbody'");
+                $('#devices tbody').append(`
+                <tr data-device-id=${device._id}>
+                <td>${device.user}</td>
+                <td>${device.name}</td>
+                </tr>`
+                );
                 });console.log("'#devices tbody endeededed");
                 $('#devices tbody tr').on('click', (e) => {
                     console.log("#devices tbody trasdasdasdasdasdasqwd");
@@ -55,8 +51,7 @@ var devicesapp=angular.module('devicesapp',[]);
                 //location.href = '/login';
             }
         }
-    });
-
+    
 
 
 var adddeviceapp=angular.module('adddeviceapp',[]);

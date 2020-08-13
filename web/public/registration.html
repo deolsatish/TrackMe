@@ -19,21 +19,48 @@ scale=1.0>
     </div>
     <h1>Registration</h1>
     <br>
-    <div ng-app="registerapp" ng-controller="formCtrl">
-        <label for="username">User</label>
-        <input type="text" class="form-control" ng-model="username" />
+    <form ng-app="registerapp" ng-controller="formCtrl" name="myForm" novalidate>
+        <label for="username">User:</label>
+        <input type="text" class="form-control" name="username" ng-model="username" required>
+        <span style="color:red" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+            <span ng-show="myForm.username.$error.required">Username is required.</span>
+        </span>
         <br>
-        <label for="password">Password</label>
-        <input type="password" class="form-control" ng-model="password" />
         <br>
-        <label for="confirm">Confirm</label>
-        <input type="password" class="form-control" ng-model="confirm" />
+        <label for="password">Password:</label>
+        <div class ="input-group mb-3">
+            <input type="password" class="form-control" name="password" ng-model="password" required passwordvalidation>
+            <div class="input-group-append">
+                <span class ="input-group-text" >{{grade()}}</span>
+            </div>
+        </div>
+        <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+            <span ng-show="myForm.password.$error.required">Password is required</span>
+        </span>
         <br>
-    <button ng-click="register()" class="btn btn-success" id="register">Login</button>
-    <p><a href="login.html"> Have an account? Login here.</a></p>
-    <div class="message" id="message"></div>
-    <div ng-include="'footer.html'"></div>
-    </div>
+        <span style="color:green" ng-show="myForm.password.$dirty && !(password.length>=8)">Password must be greater than 8 characters.</span>
+        <br>
+        <br>
+        <label for="confirm">Confirm Password :</label>
+        <input type="password" class="form-control" name="confirm" ng-model="confirm" required>
+        <span style="color:red" ng-show="myForm.confirm.$dirty && myForm.confirm.$invalid">
+            <span ng-show="myForm.confirm.$error.required">Password is required.</span>
+        </span>
+        <br>
+        <span style="color:darkgoldenrod" ng-show="password !=confirm">
+            <span>Password's do not match.</span>
+        </span>
+        <br>
+        <br>
+        <button ng-click="register()" class="btn btn-success" id="register" ng-disabled="(myForm.username.$dirty && myForm.username.$invalid) ||  
+        (myForm.password.$dirty && myForm.password.$invalid) ||  (myForm.confirm.$dirty && myForm.confirm.$invalid)  || (password !=confirm) ">Register</button>
+        <br>
+        <br>
+        <p><a href="login.html"> Have an account? Login here.</a></p>
+        <div class="message" id="message"></div>
+        <div ng-include="'footer.html'"></div>
+        <br>
+    <form>
     
 
     <br>

@@ -84,20 +84,52 @@ adddeviceapp.controller('formCtrl',function($scope)
 
 
 var registerapp=angular.module('registerapp',[]);
+registerapp.directive('passwordvalidation', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attr, mCtrl) {
+            function myValidation(value) {
+                if (value.length >= 8) {
+                    mCtrl.$setValidity('charE', true);
+                } else {
+                    mCtrl.$setValidity('charE', false);
+                }
+                return value;
+            }
+            mCtrl.$parsers.push(myValidation);
+        }
+    };
+});
 registerapp.controller('formCtrl',function($scope)
 {
     $scope.username="";
     $scope.password="";
     $scope.confirm="";
+    var strength = "";
+    $scope.grade = function() {
+        var size = $scope.password.length;
+        if (size > 12) 
+        {
+          strength = 'strong';
+        } else if (size > 8) 
+        {
+          strength = 'medium';
+        } else 
+        {
+          strength = 'weak';
+        }
+        
+        return strength;
+    }
     $scope.register = function() {
-        const user = $scope.username;
-        const password = $scope.password;
-        const confirm = $scope.confirm;
-        const isAdmin=false;
-        console.log("name: "+user);
-        console.log("password: "+password);
-        console.log("confirm: "+confirm);
-        $.post(`${API_URL}/authenticate`, { "name":user, "password":password })
+    const user = $scope.username;
+    const password = $scope.password;
+    const confirm = $scope.confirm;
+    const isAdmin=false;
+    console.log("name: "+user);
+    console.log("password: "+password);
+    console.log("confirm: "+confirm);
+    $.post(`${API_URL}/authenticate`, { "name":user, "password":password })
     .then((response) =>{
         console.log("response");
         console.log(response);
@@ -191,3 +223,23 @@ loginapp.controller('formCtrl',function($scope,$http)
         
     }
 });
+
+
+var fizzbuzz = (function(){
+  function process(n){
+    if(!(n%15)){
+      return 'FizzBuzz'
+    }
+    if(!(n%3)){
+      return 'Fizz'
+    }
+    if(!(n%5)){
+      return 'Buzz'
+    }
+    return n
+  }
+
+  return {
+    process: process
+  }
+})()
